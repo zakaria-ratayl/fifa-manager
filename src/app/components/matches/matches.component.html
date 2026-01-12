@@ -1,0 +1,137 @@
+<div class="matches-page">
+    <div class="page-header">
+        <div class="header-content">
+            <div>
+                <h1>⚔️ Matches</h1>
+                <p class="subtitle">Schedule and simulate matches</p>
+            </div>
+            <button class="btn-add" (click)="toggleScheduleForm()" *ngIf="hasTeam">
+                {{ showScheduleForm ? '✖️ Cancel' : '📅 Schedule Match' }}
+            </button>
+        </div>
+    </div>
+
+    <!-- No Team Warning -->
+    <div *ngIf="!hasTeam" class="warning-card">
+        <div class="warning-icon">⚠️</div>
+        <h2>Create a team first!</h2>
+        <p>You need to create your team before scheduling matches.</p>
+        <a routerLink="/team" class="btn-primary">Create Team</a>
+    </div>
+
+    <!-- Schedule Match Form -->
+    <div class="section-card" *ngIf="showScheduleForm && hasTeam">
+        <h2>📅 Schedule New Match</h2>
+        <form [formGroup]="matchForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="awayTeam">Opponent Team *</label>
+                    <input type="text" id="awayTeam" formControlName="awayTeam" placeholder="Enter opponent name"
+                        class="form-control" />
+                    <div class="error" *ngIf="matchForm.get('awayTeam')?.invalid && matchForm.get('awayTeam')?.touched">
+                        <span *ngIf="matchForm.get('awayTeam')?.errors?.['required']">Opponent name is required</span>
+                        <span *ngIf="matchForm.get('awayTeam')?.errors?.['minlength']">Name must be at least 3
+                            characters</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Match Date *</label>
+                    <input type="date" id="date" formControlName="date" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label for="venue">Venue</label>
+                    <input type="text" id="venue" formControlName="venue" placeholder="Stadium name"
+                        class="form-control" />
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary" [disabled]="matchForm.invalid">
+                ✨ Schedule Match
+            </button>
+        </form>
+    </div>
+
+    <!-- Upcoming Matches -->
+    <div class="section-card" *ngIf="hasTeam">
+        <h2>📅 Upcoming Matches ({{ upcomingMatches.length }})</h2>
+
+        <div *ngIf="upcomingMatches.length === 0" class="empty-state">
+            <p>No upcoming matches scheduled.</p>
+        </div>
+
+        <div class="matches-list">
+            <div *ngFor="let match of upcomingMatches" class="match-card upcoming">
+                <div class="match-header">
+                    <div class="match-date">
+                        📅 {{ match.date | date:'EEEE, MMM d, y' }}
+                    </div>
+                    <div class="match-stadium">🏟️ {{ match.venue }}</div>
+                </div>
+
+                <div class="match-teams">
+                    <div class="team home">
+                        <span class="team-name">{{ match.homeTeam }}</span>
+                        <span class="team-label">Home</span>
+                    </div>
+
+                    <div class="vs">VS</div>
+
+                    <div class="team away">
+                        <span class="team-name">{{ match.awayTeam }}</span>
+                        <span class="team-label">Away</span>
+                    </div>
+                </div>
+
+                <div class="match-actions">
+                    <button class="btn-simulate" (click)="simulateMatch(match.id)"
+                        [disabled]="simulatingMatchId === match.id" [class.simulating]="simulatingMatchId === match.id">
+                        {{ simulatingMatchId === match.id ? '⏳ Simulating...' : '▶️ Simulate Match' }}
+                    </button>
+                    <button class="btn-delete-small" (click)="deleteMatch(match.id)">🗑️</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Match Results -->
+    <div class="section-card" *ngIf="hasTeam">
+        <h2>🏆 Match Results ({{ completedMatches.length }})</h2>
+
+        <div *ngIf="completedMatches.length === 0" class="empty-state">
+            <p>No completed matches yet.</p>
+        </div>
+
+        <div class="matches-list">
+            <div *ngFor="let match of completedMatches" class="match-card completed" [class]="getResultClass(match)">
+                <div class="match-header">
+                    <div class="match-date">
+                        📅 {{ match.date | date:'MMM d, y' }}
+                    </div>
+                    <div class="match-result-label">
+                        <span *ngIf="match.score.home > match.score.away" class="win-label">✓ WIN</span>
+                        <span *ngIf="match.score.home < match.score.away" class="loss-label">✗ LOSS</span>
+                        <span *ngIf="match.score.home === match.score.away" class="draw-label">− DRAW</span>
+                    </div>
+                </div>
+
+                <div class="match-score">
+                    <div class="team-score home">
+                        <span class="team-name">{{ match.homeTeam }}</span>
+                        <span class="score">{{ match.score.home }}</span>
+                    </div>
+
+                    <div class="score-separator">−</div>
+
+                    <div class="team-score away">
+                        <span class="score">{{ match.score.away }}</span>
+                        <span class="team-name">{{ match.awayTeam }}</span>
+                    </div>
+                </div>
+
+                <div class="match-venue">🏟️ {{ match.venue }}</div>
+            </div>
+        </div>
+    </div>
+</div>

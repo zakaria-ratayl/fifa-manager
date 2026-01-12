@@ -1,0 +1,239 @@
+﻿[33mΓ¥»[39m Building...
+[32mΓ£ö[39m Building...
+[35mPrerendered 0 static routes.[39m
+Application bundle generation failed. [3.639 seconds] - 2026-01-12T10:38:33.946Z
+
+node.exe : 
+[1m[31m[31mX [4
+1;31m[[41;97mERROR
+[41;31m][0m 
+[1mTS2532: Object 
+is possibly 
+'undefined'.[0m 
+[1m[35m[plugin an
+gular-compiler][0m
+At C:\Program Files
+\nodejs\npx.ps1:29 
+char:3
++   & $NODE_EXE 
+$NPX_CLI_JS $args
++   ~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
+    + CategoryInfo 
+             : No  
+  tSpecified: (   
+ [1m[31m[31mX    
+...r-compiler]    
+[0m:String) [    
+], RemoteExcep    
+tion
+    + FullyQualifi 
+   edErrorId : Na  
+  tiveCommandErr   
+ or
+ 
+
+    src/app/compone
+nts/dashboard/dashb
+oard.component.html
+:58:55:
+[37m      58 Γöé 
+...            
+<span 
+class="value">{{ te
+am?.stats.[32mwins
+[37m || 0 
+}}</span>
+         Γò╡       
+                   
+                   
+      [32m~~~~[0m
+
+  Error occurs in 
+the template of 
+component 
+DashboardComponent.
+
+    src/app/compone
+nts/dashboard/dashb
+oard.component.ts:1
+6:17:
+[37m      16 Γöé  
+   templateUrl: [3
+2m'./dashboard.comp
+onent.html'[37m,
+         Γò╡       
+           [32m~~~
+~~~~~~~~~~~~~~~~~~~
+~~~~~~[0m
+
+
+[31mX [41;31m[[4
+1;97mERROR[41;31m]
+[0m [1mTS2532: 
+Object is possibly 
+'undefined'.[0m 
+[1m[35m[plugin an
+gular-compiler][0m
+
+    src/app/compone
+nts/dashboard/dashb
+oard.component.html
+:62:55:
+[37m      62 Γöé 
+...           
+<span 
+class="value">{{ te
+am?.stats.[32mdraw
+s[37m || 0 
+}}</span>
+         Γò╡       
+                   
+                   
+     [32m~~~~~[0m
+
+  Error occurs in 
+the template of 
+component 
+DashboardComponent.
+
+    src/app/compone
+nts/dashboard/dashb
+oard.component.ts:1
+6:17:
+[37m      16 Γöé  
+   templateUrl: [3
+2m'./dashboard.comp
+onent.html'[37m,
+         Γò╡       
+           [32m~~~
+~~~~~~~~~~~~~~~~~~~
+~~~~~~[0m
+
+
+[31mX [41;31m[[4
+1;97mERROR[41;31m]
+[0m [1mTS2532: 
+Object is possibly 
+'undefined'.[0m 
+[1m[35m[plugin an
+gular-compiler][0m
+
+    src/app/compone
+nts/dashboard/dashb
+oard.component.html
+:66:55:
+[37m      66 Γöé 
+...          <span 
+class="value">{{ te
+am?.stats.[32mloss
+es[37m || 0 
+}}</span>
+         Γò╡       
+                   
+                   
+    [32m~~~~~~[0m
+
+  Error occurs in 
+the template of 
+component 
+DashboardComponent.
+
+    src/app/compone
+nts/dashboard/dashb
+oard.component.ts:1
+6:17:
+[37m      16 Γöé  
+   templateUrl: [3
+2m'./dashboard.comp
+onent.html'[37m,
+         Γò╡       
+           [32m~~~
+~~~~~~~~~~~~~~~~~~~
+~~~~~~[0m
+
+
+[31mX [41;31m[[4
+1;97mERROR[41;31m]
+[0m [1mTS2532: 
+Object is possibly 
+'undefined'.[0m 
+[1m[35m[plugin an
+gular-compiler][0m
+
+    src/app/compone
+nts/dashboard/dashb
+oard.component.html
+:70:55:
+[37m      70 Γöé 
+...     <span 
+class="value">{{ te
+am?.stats.[32mgoal
+sScored[37m || 0 
+}}</span>
+         Γò╡       
+                   
+                  
+[32m~~~~~~~~~~~[0m
+
+  Error occurs in 
+the template of 
+component 
+DashboardComponent.
+
+    src/app/compone
+nts/dashboard/dashb
+oard.component.ts:1
+6:17:
+[37m      16 Γöé  
+   templateUrl: [3
+2m'./dashboard.comp
+onent.html'[37m,
+         Γò╡       
+           [32m~~~
+~~~~~~~~~~~~~~~~~~~
+~~~~~~[0m
+
+
+[31mX [41;31m[[4
+1;97mERROR[41;31m]
+[0m [1mTS2532: 
+Object is possibly 
+'undefined'.[0m 
+[1m[35m[plugin an
+gular-compiler][0m
+
+    src/app/compone
+nts/dashboard/dashb
+oard.component.html
+:74:55:
+[37m      74 Γöé 
+...   <span 
+class="value">{{ te
+am?.stats.[32mgoal
+sConceded[37m || 
+0 }}</span>
+         Γò╡       
+                   
+                [3
+2m~~~~~~~~~~~~~[0m
+
+  Error occurs in 
+the template of 
+component 
+DashboardComponent.
+
+    src/app/compone
+nts/dashboard/dashb
+oard.component.ts:1
+6:17:
+[37m      16 Γöé  
+   templateUrl: [3
+2m'./dashboard.comp
+onent.html'[37m,
+         Γò╡       
+           [32m~~~
+~~~~~~~~~~~~~~~~~~~
+~~~~~~[0m
+
+[39m[22m

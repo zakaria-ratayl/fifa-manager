@@ -1,0 +1,130 @@
+<div class="player-detail-page" *ngIf="player">
+    <div class="page-header">
+        <a routerLink="/players" class="back-link">← Back to Players</a>
+    </div>
+
+    <div class="player-profile">
+        <!-- Player Card -->
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="player-rating-large" [style.background]="getRatingColor(player.overall)">
+                    {{ player.overall }}
+                </div>
+                <div class="player-info">
+                    <h1>{{ player.name }}</h1>
+                    <p class="player-meta">
+                        {{ player.position }} • {{ player.age }} years old
+                        <span *ngIf="player.jerseyNumber" class="jersey">#{{ player.jerseyNumber }}</span>
+                    </p>
+                </div>
+                <div class="actions">
+                    <button class="btn-edit" (click)="toggleEdit()">
+                        {{ isEditing ? '✖️ Cancel' : '✏️ Edit' }}
+                    </button>
+                    <button class="btn-delete" (click)="deletePlayer()">
+                        🗑️ Delete
+                    </button>
+                </div>
+            </div>
+
+            <div class="player-form-display">
+                <span class="form-label">Current Form</span>
+                <div class="form-bar-large">
+                    <div class="form-fill" [style.width.%]="player.form * 10"></div>
+                </div>
+                <span class="form-value-large">{{ player.form.toFixed(1) }}/10</span>
+            </div>
+        </div>
+
+        <!-- Edit Form -->
+        <div class="section-card" *ngIf="isEditing">
+            <h2>✏️ Edit Player</h2>
+            <form [formGroup]="playerForm" (ngSubmit)="onSubmit()">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Player Name *</label>
+                        <input type="text" id="name" formControlName="name" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="position">Position *</label>
+                        <select id="position" formControlName="position" class="form-control">
+                            <option *ngFor="let pos of positions" [value]="pos">{{ pos }}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age">Age *</label>
+                        <input type="number" id="age" formControlName="age" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jerseyNumber">Jersey Number</label>
+                        <input type="number" id="jerseyNumber" formControlName="jerseyNumber" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="form">Form (0-10) *</label>
+                        <input type="number" id="form" formControlName="form" step="0.1" class="form-control" />
+                    </div>
+                </div>
+
+                <div formGroupName="skills">
+                    <h3>⚡ Player Skills</h3>
+                    <div class="skills-grid">
+                        <div class="form-group">
+                            <label for="pace">Pace</label>
+                            <input type="number" id="pace" formControlName="pace" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="shooting">Shooting</label>
+                            <input type="number" id="shooting" formControlName="shooting" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="passing">Passing</label>
+                            <input type="number" id="passing" formControlName="passing" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="dribbling">Dribbling</label>
+                            <input type="number" id="dribbling" formControlName="dribbling" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="defending">Defending</label>
+                            <input type="number" id="defending" formControlName="defending" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="physical">Physical</label>
+                            <input type="number" id="physical" formControlName="physical" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary" [disabled]="playerForm.invalid">
+                    💾 Save Changes
+                </button>
+            </form>
+        </div>
+
+        <!-- Skills Display -->
+        <div class="section-card" *ngIf="!isEditing">
+            <h2>⚡ Player Attributes</h2>
+            <div class="skills-display">
+                <div *ngFor="let skill of getSkillArray()" class="skill-item">
+                    <div class="skill-info">
+                        <span class="skill-name">{{ skill.name }}</span>
+                        <span class="skill-value">{{ skill.value }}</span>
+                    </div>
+                    <div class="skill-bar-large">
+                        <div class="skill-fill" [style.width.%]="skill.value"
+                            [style.background]="getRatingColor(skill.value)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="not-found" *ngIf="!player">
+    <h2>Player not found</h2>
+    <a routerLink="/players" class="btn-primary">← Back to Players</a>
+</div>

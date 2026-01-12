@@ -1,0 +1,41 @@
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-brand">
+            <span class="brand-icon">⚽</span>
+            <span class="brand-text">FIFA Manager</span>
+        </div>
+
+        <button class="menu-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <ul class="nav-links" [class.active]="isMenuOpen">
+            <li>
+                <a routerLink="/dashboard" routerLinkActive="active" (click)="closeMenu()">
+                    <span class="nav-icon">📊</span>
+                    Dashboard
+                </a>
+            </li>
+            <li>
+                <a routerLink="/team" routerLinkActive="active" (click)="closeMenu()">
+                    <span class="nav-icon">🏆</span>
+                    Team
+                </a>
+            </li>
+            <li>
+                <a routerLink="/players" routerLinkActive="active" (click)="closeMenu()">
+                    <span class="nav-icon">👥</span>
+                    Players
+                </a>
+            </li>
+            <li>
+                <a routerLink="/matches" routerLinkActive="active" (click)="closeMenu()">
+                    <span class="nav-icon">⚔️</span>
+                    Matches
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

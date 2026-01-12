@@ -1,0 +1,136 @@
+<div class="dashboard">
+    <div class="dashboard-header">
+        <h1>📊 Dashboard</h1>
+        <p class="subtitle">Your team overview and statistics</p>
+    </div>
+
+    <!-- No Team Created -->
+    <div *ngIf="!hasTeam" class="no-team-card">
+        <div class="icon">⚽</div>
+        <h2>Welcome to FIFA Manager!</h2>
+        <p>Get started by creating your team</p>
+        <a routerLink="/team" class="cta-button">Create Your Team</a>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div *ngIf="hasTeam" class="dashboard-content">
+        <!-- Team Stats -->
+        <div class="stats-grid">
+            <div class="stat-card team-name">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-content">
+                    <h3>{{ team?.name }}</h3>
+                    <p>{{ team?.formation }} Formation</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-content">
+                    <h3>{{ team?.players?.length || 0 }}</h3>
+                    <p>Total Players</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-content">
+                    <h3 [style.color]="getRatingColor(teamAverageRating)">{{ teamAverageRating }}</h3>
+                    <p>Team Rating</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📈</div>
+                <div class="stat-content">
+                    <h3>{{ winPercentage }}%</h3>
+                    <p>Win Rate</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Match Record -->
+        <div class="section-card">
+            <h2>📊 Match Record</h2>
+            <div class="match-stats">
+                <div class="match-stat wins">
+                    <span class="label">Wins</span>
+                    <span class="value">{{ team?.stats?.wins || 0 }}</span>
+                </div>
+                <div class="match-stat draws">
+                    <span class="label">Draws</span>
+                    <span class="value">{{ team?.stats?.draws || 0 }}</span>
+                </div>
+                <div class="match-stat losses">
+                    <span class="label">Losses</span>
+                    <span class="value">{{ team?.stats?.losses || 0 }}</span>
+                </div>
+                <div class="match-stat goals">
+                    <span class="label">Goals Scored</span>
+                    <span class="value">{{ team?.stats?.goalsScored || 0 }}</span>
+                </div>
+                <div class="match-stat goals-conceded">
+                    <span class="label">Goals Conceded</span>
+                    <span class="value">{{ team?.stats?.goalsConceded || 0 }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Players -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2>⭐ Top Players</h2>
+                <a routerLink="/players" class="view-all">View All →</a>
+            </div>
+
+            <div *ngIf="topPlayers.length === 0" class="empty-state">
+                <p>No players yet. <a routerLink="/players">Add your first player!</a></p>
+            </div>
+
+            <div class="players-grid">
+                <div *ngFor="let player of topPlayers" class="player-card">
+                    <div class="player-rating" [style.background]="getRatingColor(player.overall)">
+                        {{ player.overall }}
+                    </div>
+                    <div class="player-info">
+                        <h3>{{ player.name }}</h3>
+                        <p>{{ player.position }} • Age {{ player.age }}</p>
+                        <div class="player-form">
+                            <span class="form-label">Form:</span>
+                            <div class="form-bar">
+                                <div class="form-fill" [style.width.%]="player.form * 10"></div>
+                            </div>
+                            <span class="form-value">{{ player.form.toFixed(1) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Matches -->
+        <div class="section-card">
+            <div class="section-header">
+                <h2>⚔️ Upcoming Matches</h2>
+                <a routerLink="/matches" class="view-all">View All →</a>
+            </div>
+
+            <div *ngIf="upcomingMatches.length === 0" class="empty-state">
+                <p>No upcoming matches. <a routerLink="/matches">Schedule a match!</a></p>
+            </div>
+
+            <div class="matches-list">
+                <div *ngFor="let match of upcomingMatches" class="match-item">
+                    <div class="match-date">
+                        {{ match.date | date:'MMM d, y' }}
+                    </div>
+                    <div class="match-teams">
+                        <span class="home-team">{{ match.homeTeam }}</span>
+                        <span class="vs">vs</span>
+                        <span class="away-team">{{ match.awayTeam }}</span>
+                    </div>
+                    <div class="match-venue">{{ match.venue }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
