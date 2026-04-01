@@ -1,13 +1,16 @@
 {
   "name": "fifa-manager",
   "version": "0.0.0",
+  "homepage": "https://zakaria-ratayl.github.io/fifa-manager",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:fifa-manager": "node dist/fifa-manager/server/server.mjs"
+    "serve:ssr:fifa-manager": "node dist/fifa-manager/server/server.mjs",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "prettier": {
     "printWidth": 100,
